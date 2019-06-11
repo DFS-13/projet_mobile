@@ -1,0 +1,71 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+
+  config.vm.network "private_network", ip: "192.168.33.105"
+
+  # config.vm.network "public_network"
+
+  config.vm.synced_folder "./src", "/var/www/html"
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  # config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = "1024"
+  # end
+  #
+  # View the documentation for the provider you are using for more
+  # information on available options.
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  config.vm.provision "shell", inline: <<-SHELL
+    echo -e "Mise à jour des paquets...\n"
+    sudo apt update &> /dev/null
+    # sudo apt upgrade -y &> /dev/null
+
+    echo -e "Acquisition des paquets utilitaires...\n"
+    sudo apt-get install curl vim unzip -y &> /dev/null
+    echo -e "Installation d'Apache 2...\n"
+    sudo apt install -y apache2 &> /dev/null
+    echo -e "Activation des modules Apache...\n"
+    sudo a2enmod rewrite &> /dev/null
+    echo -e "Redémarrage d'Apache...\n"
+    sudo systemctl restart apache2 &> /dev/null
+
+    echo -e "Installation de PHP 7...\n"
+    sudo apt install -y php php-mysql php-mbstring php-xml php-xdebug &> /dev/null
+
+    echo -e "Installation de composer...\n"
+    sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer &> /dev/null
+    sudo php -r "unlink('composer-setup.php');"
+
+    echo "Installation de MySql..."
+    export DEBIAN_FRONTEND=noninteractive
+    sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password 0000'
+    sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 0000'
+    sudo -E apt install -y mysql-server &> /dev/null
+    sudo mysql -uroot -p0000 -e  "CREATE DATABASE gdlyon;"
+    sudo mysql -uroot -p0000 -e  "CREATE USER 'gdlyon'@'localhost' IDENTIFIED BY '0000';"
+    sudo mysql -uroot -p0000 -e "GRANT USAGE ON *.* TO 'gdlyon'@'localhost' IDENTIFIED BY '0000';"
+    sudo mysql -uroot -p0000 -e "GRANT ALL ON gdlyon.* TO 'gdlyon'@'localhost';"
+    sudo mysql -uroot -p0000 -e "FLUSH PRIVILEGES;"
+
+    # cd /var/www/html
+    # composer install
+  SHELL
+end
