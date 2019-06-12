@@ -11,6 +11,8 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->get('/pois', "PoiController@all");
+$router->get('/pois/{id}', "PoiController@one");
+$router->post('/pois', "PoiController@create");
+$router->put('/pois/{id}', "PoiController@update");
+$router->delete('/pois/{id}', "PoiController@delete");
