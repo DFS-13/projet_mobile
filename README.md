@@ -1,6 +1,6 @@
 # Sujet de l'épreuve d'évaluation "développement mobile et hybride"
 
-## Durée : 5 jours
+## Durée : **4** jours
 
 ## Contexte
 
