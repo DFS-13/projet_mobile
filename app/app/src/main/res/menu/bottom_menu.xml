@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <menu xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/action_market"
+        android:enabled="true"
+        android:title="Commerces"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        app:showAsAction="ifRoom"
+    />
+
+    <item
+        android:id="@+id/action_restauration"
+        android:enabled="true"
+        android:title="Restaurants"
+        android:icon="@drawable/ic_restaurant_black_24dp"
+        app:showAsAction="ifRoom"
+    />
+
+    <item
+        android:id="@+id/action_equipment"
+        android:enabled="true"
+        android:title="Equipements"
+        android:icon="@drawable/ic_build_black_24dp"
+        app:showAsAction="ifRoom"
+    />
+</menu>
