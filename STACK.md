@@ -2,9 +2,10 @@
 
 ## Application Mobile
 
-- Android natif Java 8
+- Android Kotlin
 
 ## Api
 
 - php 7.2
   - Lumen
+  - Dev: phpUnit
