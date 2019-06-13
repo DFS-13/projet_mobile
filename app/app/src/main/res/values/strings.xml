@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Grand Lyon</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
