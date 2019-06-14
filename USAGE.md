@@ -280,3 +280,13 @@ Status Codes:
 
 - 204: Resource Successfully removed
 - 404: Resource not found
+
+## Installation de l'app mobile
+
+L'app mobile ne contient aucune feature intéressante, nous ne l'avons pas publiée.
+
+Pour lancer les dources, utiliser Android Studio et ouvrir le dossier app du repo.
+
+## Avancées sur l'app
+
+Consulter les issues du repository commun avec https://github.com/DFS-13/projet_mobile
