@@ -68,7 +68,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun buildLocationCallBack() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(p0: LocationResult?) {
-                mLastLocation = p0!!.locations.get(p0!!.locations.size-1) // Get last location
+                mLastLocation = p0!!.locations.get(p0.locations.size-1) // Get last location
 
                 if(mMarker != null) {
                     mMarker!!.remove()
@@ -82,11 +82,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .position(latLng)
                     .title("Ta position")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                mMarker = mMap!!.addMarker(markerOptions)
+                mMarker = mMap.addMarker(markerOptions)
 
                 // Move Camera
-                mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-                mMap!!.animateCamera(CameraUpdateFactory.zoomTo(11f))
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(11f))
             }
         }
     }
@@ -128,7 +128,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
                             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
-                            mMap!!.isMyLocationEnabled=true
+                            mMap.isMyLocationEnabled=true
                         }
 
                 }
@@ -149,12 +149,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                mMap!!.isMyLocationEnabled=true
+                mMap.isMyLocationEnabled=true
             }
 
         }
         else
-            mMap!!.isMyLocationEnabled=true
+            mMap.isMyLocationEnabled=true
 
         mMap.uiSettings.isZoomControlsEnabled=true
     }
