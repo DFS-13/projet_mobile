@@ -26,4 +26,22 @@
         android:icon="@drawable/ic_build_black_24dp"
         app:showAsAction="ifRoom"
     />
+
+    <item
+            android:id="@+id/action_equipment2"
+            android:enabled="true"
+            android:title="Equipements"
+            android:icon="@drawable/ic_build_black_24dp"
+            app:showAsAction="ifRoom"
+    />
+
+    <item
+            android:id="@+id/action_equipment3"
+            android:enabled="true"
+            android:title="Equipements"
+            android:icon="@drawable/ic_build_black_24dp"
+            app:showAsAction="ifRoom"
+    />
+
+
 </menu>
